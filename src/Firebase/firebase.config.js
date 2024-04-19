@@ -7,12 +7,12 @@ import { getAuth } from "firebase/auth";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-    apiKey: "AIzaSyDiNXPWOHc2KFnJvwwWoZZjlghfM4JxbsM",
-    authDomain: "automobile-store-777c8.firebaseapp.com",
-    projectId: "automobile-store-777c8",
-    storageBucket: "automobile-store-777c8.appspot.com",
-    messagingSenderId: "844022846984",
-    appId: "1:844022846984:web:9ae48e0b2b49c94e4c63bd"
+    apiKey: import.meta.env.VITE_APIKEY,
+    authDomain: import.meta.env.VITE_AUTHDOMAIN,
+    projectId: import.meta.env.VITE_PROJECTID,
+    storageBucket: import.meta.env.VITE_STORAGEBUCKET,
+    messagingSenderId: import.meta.env.VITE_MESSAGINGSENDERID,
+    appId: import.meta.env.VITE_APPID
 };
 
 // Initialize Firebase
