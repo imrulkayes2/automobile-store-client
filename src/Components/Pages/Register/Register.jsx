@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../../Firebase/Authprovider/AuthProvider';
+
 
 const Register = () => {
+    const { createUser } = useContext(AuthContext)
     const handleRegister = e => {
         e.preventDefault();
         const form = e.target;
@@ -9,6 +12,13 @@ const Register = () => {
         const email = form.email.value;
         const password = form.password.value;
         console.log(name, email, password);
+        createUser(email, password)
+            .then(result => {
+                console.log(result.user);
+            })
+            .then(error => {
+                console.log(error.message);
+            })
     }
     return (
         <div className="hero min-h-screen bg-base-200">
