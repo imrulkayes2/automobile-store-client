@@ -1,9 +1,13 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../Firebase/Authprovider/AuthProvider';
+import Swal from 'sweetalert2';
 
 const Login = () => {
     const { signInUser } = useContext(AuthContext);
+    const navigate = useNavigate();
+    const loacation = useLocation();
+    console.log(loacation);
     const handleLogIn = e => {
         e.preventDefault();
         const form = e.target;
@@ -13,6 +17,13 @@ const Login = () => {
         signInUser(email, password)
             .then(result => {
                 console.log(result.user);
+                Swal.fire({
+                    title: "Good job!",
+                    text: "LogIn Successfully!",
+                    icon: "success"
+                })
+                // Navigate after logIn
+                navigate(loacation?.state ? location.state : '/');
             })
             .then(error => {
                 console.log(error.message);
