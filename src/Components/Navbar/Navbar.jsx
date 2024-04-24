@@ -49,7 +49,8 @@ const Navbar = () => {
                 </div>
                 <div className="navbar-end">
                     {
-                        user ? <><p>{user.email}</p>  <button onClick={handleLogOut} className='btn btn-primary'>Logout</button></>
+                        user ? <><img className='rounded-full pr-2' src={user.photoURL
+                        } alt="" />  <button onClick={handleLogOut} className='btn btn-primary'>Logout</button></>
                             :
                             <NavLink to={'/login'}><a className='btn'>Login</a></NavLink>
                     }
