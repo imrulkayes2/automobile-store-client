@@ -1,10 +1,12 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { AuthContext } from '../../../Firebase/Authprovider/AuthProvider';
+import AuthProvider, { AuthContext } from '../../../Firebase/Authprovider/AuthProvider';
+import Swal from 'sweetalert2';
+import auth from '../../../Firebase/firebase.config';
 
 
 const Register = () => {
-    const { createUser } = useContext(AuthContext)
+    const { createUser, signInByGoogle } = useContext(AuthContext)
     const handleRegister = e => {
         e.preventDefault();
         const form = e.target;
@@ -15,6 +17,20 @@ const Register = () => {
         createUser(email, password)
             .then(result => {
                 console.log(result.user);
+            })
+            .then(error => {
+                console.log(error.message);
+            })
+    }
+    const handleSignInByGoogle = () => {
+        signInByGoogle(auth, AuthProvider)
+            .then(result => {
+                console.log(result.user)
+                Swal.fire({
+                    title: "Good job!",
+                    text: "LogIn Successfully!",
+                    icon: "success"
+                })
             })
             .then(error => {
                 console.log(error.message);
@@ -54,6 +70,7 @@ const Register = () => {
                             <p>Already register? please <Link to={'/login'}><span className='text-green-400 font-bold'>Login</span></Link></p>
                         </div>
                     </form>
+                    <button className='p-3 text-white bg-slate-500' onClick={handleSignInByGoogle}>LogIn By Google</button>
                 </div>
             </div>
         </div>

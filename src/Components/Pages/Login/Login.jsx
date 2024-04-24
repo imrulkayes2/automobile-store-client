@@ -1,11 +1,10 @@
 import React, { useContext } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import AuthProvider, { AuthContext } from '../../../Firebase/Authprovider/AuthProvider';
-import Swal from 'sweetalert2';
-import auth from '../../../Firebase/firebase.config';
+import { AuthContext } from '../../../Firebase/Authprovider/AuthProvider';
+
 
 const Login = () => {
-    const { signInUser, signInByGoogle } = useContext(AuthContext);
+    const { signInUser } = useContext(AuthContext);
     const navigate = useNavigate();
     const loacation = useLocation();
     console.log(loacation);
@@ -30,15 +29,7 @@ const Login = () => {
                 console.log(error.message);
             })
     }
-    const handleSignInByGoogle = () => {
-        signInByGoogle(auth, AuthProvider)
-            .then(result => {
-                console.log(result.user)
-            })
-            .then(error => {
-                console.log(error.message);
-            })
-    }
+
     return (
         <div className="hero min-h-screen bg-base-200">
             <div className="hero-content flex-col">
@@ -67,7 +58,7 @@ const Login = () => {
                             <p>New User? Please <Link to={'/register'}><span className='text-red-400 font-bold'>Register</span></Link></p>
                         </div>
                     </form>
-                    <button onClick={handleSignInByGoogle}>LogIn By Google</button>
+
                 </div>
             </div>
         </div>
